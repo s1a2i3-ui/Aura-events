@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AURA Events & Co. | Crafting Unforgettable Experiences</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .font-serif-heading {
+      font-family: 'Playfair Display', serif;
+    }
+    .text-gold-gradient {
+      background: linear-gradient(135deg, #FCEEAC 0%, #E5C158 50%, #C5A059 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .border-gold-glow {
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+    }
+    .border-gold-glow:hover {
+      border-color: rgba(212, 175, 55, 0.6);
+      box-shadow: 0 0 25px rgba(212, 175, 55, 0.25);
+    }
+    .glass-card {
+      background: rgba(18, 24, 38, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-nav {
+      background: rgba(11, 19, 43, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .glow-sphere {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+      opacity: 0.25;
+    }
+  </style>
+</head>
+<body class="bg-[#0B132B] text-slate-100 antialiased selection:bg-[#D4AF37]/30 selection:text-[#FCEEAC]">
+
+  <!-- Glow Background Accents -->
+  <div class="glow-sphere w-96 h-96 bg-[#D4AF37] top-10 left-1/4 -z-10"></div>
+  <div class="glow-sphere w-[500px] h-[500px] bg-[#3B82F6] top-[40%] -right-20 -z-10 opacity-15"></div>
+  <div class="glow-sphere w-96 h-96 bg-[#E8C39E] bottom-20 left-10 -z-10"></div>
+
+  <!-- HEADER / NAVIGATION BAR -->
+  <header class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-amber-500/10 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-600 via-amber-400 to-yellow-200 flex items-center justify-center shadow-lg shadow-amber-500/20 group-hover:scale-105 transition-transform">
+          <svg class="w-6 h-6 text-[#0B132B]" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+          </svg>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-serif-heading text-xl font-bold tracking-wider text-gold-gradient">AURA</span>
+          <span class="text-[10px] uppercase tracking-[0.25em] text-amber-200/70 -mt-1">Events & Co.</span>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <a href="#home" class="hover:text-[#E5C158] transition-colors">Home</a>
+        <a href="#about" class="hover:text-[#E5C158] transition-colors">About Us</a>
+        <a href="#services" class="hover:text-[#E5C158] transition-colors">Services</a>
+        <a href="#team" class="hover:text-[#E5C158] transition-colors">Leadership</a>
+        <a href="#gallery" class="hover:text-[#E5C158] transition-colors">Gallery</a>
+        <a href="#contact" class="hover:text-[#E5C158] transition-colors">Contact</a>
+      </nav>
+
+      <div class="hidden sm:flex items-center">
+        <a href="#booking" class="px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-gradient-to-r from-[#D4AF37] via-[#FCEEAC] to-[#AA7C11] text-[#0B132B] hover:shadow-lg hover:shadow-amber-500/25 hover:scale-[1.02] active:scale-[0.98] transition-all">
+          Book an Event
+        </a>
+      </div>
+
+      <button id="mobileMenuBtn" class="md:hidden p-2 text-slate-300 hover:text-white focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+
+    <div id="mobileMenu" class="hidden md:hidden glass-card border-t border-amber-500/10 px-6 py-4 space-y-3">
+      <a href="#home" class="block text-sm hover:text-[#E5C158]">Home</a>
+      <a href="#about" class="block text-sm hover:text-[#E5C158]">About Us</a>
+      <a href="#services" class="block text-sm hover:text-[#E5C158]">Services</a>
+      <a href="#team" class="block text-sm hover:text-[#E5C158]">Leadership</a>
+      <a href="#gallery" class="block text-sm hover:text-[#E5C158]">Gallery</a>
+      <a href="#contact" class="block text-sm hover:text-[#E5C158]">Contact</a>
+      <a href="#booking" class="block w-full text-center px-4 py-2 rounded-full text-xs font-semibold uppercase bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-[#0B132B]">
+        Book an Event
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section id="home" class="relative pt-32 pb-20 md:pt-44 md:pb-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-7 space-y-6 text-left">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card border-gold-glow text-amber-300 text-xs font-medium tracking-wide">
+          <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+          Next-Generation Event Management Startup
+        </div>
+
+        <h1 class="font-serif-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-white">
+          Crafting Unforgettable <br class="hidden sm:block">
+          <span class="text-gold-gradient italic">Experiences</span> From the Ground Up.
+        </h1>
+
+        <p class="text-base sm:text-lg text-slate-300 max-w-2xl font-light leading-relaxed">
+          A fresh, innovative event management startup dedicated to turning your visionary moments into seamless, breathtaking realities. From high-end corporate summits to intimate luxury celebrations.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-4 pt-4">
+          <a href="#booking" class="px-7 py-3.5 rounded-full text-sm font-semibold tracking-wide bg-gradient-to-r from-[#D4AF37] via-[#FCEEAC] to-[#AA7C11] text-[#0B132B] shadow-xl shadow-amber-500/20 hover:shadow-amber-500/30 hover:scale-105 transition-all">
+            Plan Your Event Today
+          </a>
+          <a href="#services" class="px-7 py-3.5 rounded-full text-sm font-semibold tracking-wide glass-card hover:bg-white/10 text-slate-200 border border-slate-700 hover:border-amber-400/40 transition-all flex items-center gap-2">
+            Explore Our Services
+            <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+          </a>
+        </div>
+
+        <div class="pt-8 border-t border-slate-800/80 grid grid-cols-3 gap-4">
+          <div>
+            <div class="font-serif-heading text-2xl sm:text-3xl font-bold text-amber-300">100%</div>
+            <div class="text-xs text-slate-400 mt-0.5">Bespoke Design</div>
+          </div>
+          <div>
+            <div class="font-serif-heading text-2xl sm:text-3xl font-bold text-amber-300">50+</div>
+            <div class="text-xs text-slate-400 mt-0.5">Vetted Vendors</div>
+          </div>
+          <div>
+            <div class="font-serif-heading text-2xl sm:text-3xl font-bold text-amber-300">5/5★</div>
+            <div class="text-xs text-slate-400 mt-0.5">Client Rating</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5 relative">
+        <div class="relative mx-auto max-w-md lg:max-w-none">
+          <div class="absolute -inset-1.5 rounded-3xl bg-gradient-to-r from-amber-500/30 via-yellow-200/20 to-amber-700/30 blur-xl opacity-75"></div>
+          <div class="relative glass-card rounded-3xl overflow-hidden border border-amber-500/20 p-3 shadow-2xl">
+            <div class="relative h-[400px] sm:h-[460px] rounded-2xl overflow-hidden group">
+              <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1000&q=80" 
+                   alt="Luxury Event Celebration" 
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#0B132B] via-transparent to-transparent"></div>
+              
+              <div class="absolute bottom-6 left-6 right-6 p-4 rounded-xl glass-card border border-amber-400/30">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <span class="text-xs font-semibold uppercase tracking-widest text-amber-400">Featured Concept</span>
+                    <h3 class="text-white font-medium text-sm sm:text-base">The Celestial Gala 2026</h3>
+                  </div>
+                  <span class="px-3 py-1 rounded-full text-[10px] font-semibold uppercase bg-amber-400/20 text-amber-300 border border-amber-400/30">
+                    Grand Launch
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT US SECTION -->
+  <section id="about" class="py-20 bg-[#080D1F] border-y border-slate-800/60 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-5">
+          <div class="relative">
+            <div class="glass-card rounded-2xl p-6 border-gold-glow relative z-10 space-y-6">
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-amber-300">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="text-white font-semibold">Fresh Energy & Precision</h4>
+                  <p class="text-xs text-slate-400">Rethinking modern event architecture</p>
+                </div>
+              </div>
+              
+              <p class="text-xs text-slate-300 leading-relaxed italic">
+                "We founded AURA with a single mission: to replace cookie-cutter event templates with immersive, bespoke sensory journeys engineered to perfection."
+              </p>
+
+              <div class="grid grid-cols-2 gap-3 pt-2 text-xs">
+                <div class="p-3 rounded-lg bg-slate-900/60 border border-slate-800">
+                  <div class="text-amber-400 font-bold mb-1">Tailored Styling</div>
+                  <div class="text-slate-400">Custom themes & 3D mood boards</div>
+                </div>
+                <div class="p-3 rounded-lg bg-slate-900/60 border border-slate-800">
+                  <div class="text-amber-400 font-bold mb-1">Flawless Flow</div>
+                  <div class="text-slate-400">Minute-by-minute execution</div>
+                </div>
+              </div>
+            </div>
+            <div class="absolute -bottom-6 -right-6 w-48 h-48 bg-amber-500/20 rounded-full blur-2xl -z-0"></div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 space-y-6">
+          <div class="text-xs uppercase tracking-widest text-amber-400 font-semibold">About Our Startup</div>
+          <h2 class="font-serif-heading text-3xl sm:text-4xl font-bold text-white leading-tight">
+            A Fresh Perspective on High-End Event Architecture.
+          </h2>
+          <p class="text-sm sm:text-base text-slate-300 leading-relaxed font-light">
+            At <strong>AURA Events & Co.</strong>, we bring vibrant energy, relentless attention to detail, and a modern aesthetic to the event management landscape. Born out of a desire to create extraordinary moments, we combine seamless logistics with visionary creative styling.
+          </p>
+          <p class="text-sm sm:text-base text-slate-300 leading-relaxed font-light">
+            Whether launching an ambitious tech product, celebrating a once-in-a-lifetime wedding, or hosting a high-profile concert, our team curates every element—from venue selection and immersive lighting to hospitality and vendor synchronization.
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+            <div class="p-4 rounded-xl glass-card border border-slate-800 hover:border-amber-400/40 transition-colors">
+              <div class="text-amber-300 font-serif-heading font-bold text-lg mb-1">Visionary</div>
+              <div class="text-xs text-slate-400">Custom-crafted concepts that leave lasting impressions.</div>
+            </div>
+            <div class="p-4 rounded-xl glass-card border border-slate-800 hover:border-amber-400/40 transition-colors">
+              <div class="text-amber-300 font-serif-heading font-bold text-lg mb-1">Meticulous</div>
+              <div class="text-xs text-slate-400">Flawless timeline & vendor coordination on-site.</div>
+            </div>
+            <div class="p-4 rounded-xl glass-card border border-slate-800 hover:border-amber-400/40 transition-colors">
+              <div class="text-amber-300 font-serif-heading font-bold text-lg mb-1">Unmatched</div>
+              <div class="text-xs text-slate-400">High-touch client care and transparent planning.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES OFFERED SECTION -->
+  <section id="services" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+      <div class="text-xs uppercase tracking-widest text-amber-400 font-semibold">Our Expertise</div>
+      <h2 class="font-serif-heading text-3xl sm:text-4xl font-bold text-white">Bespoke Services for Every Milestone</h2>
+      <p class="text-slate-300 text-sm sm:text-base font-light">
+        From grand corporate summits to intimate celebrations, we offer full-suite event production tailored to your vision.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      
+      <!-- Card 1 -->
+      <div class="glass-card rounded-2xl p-6 border-gold-glow flex flex-col justify-between group hover:-translate-y-1 transition-all duration-300">
+        <div>
+          <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-400/30 flex items-center justify-center text-amber-300 mb-6 group-hover:bg-amber-400 group-hover:text-[#0B132B] transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5m0 0h4m-4 0V9a2 2 0 012-2h2a2 2 0 012 2v12"/>
+            </svg>
+          </div>
+          <h3 class="font-serif-heading text-xl font-bold text-white mb-3">Corporate Events & Product Launches</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            High-impact brand activations, executive summits, product unveils, and annual galas designed to elevate your brand presence and engage key stakeholders.
+          </p>
+        </div>
+        <div class="pt-6 mt-6 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="text-amber-400/80 font-medium">Keynote & Stage Design</span>
+          <a href="#booking" class="text-white hover:text-amber-300 flex items-center gap-1 font-semibold">Book Service &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="glass-card rounded-2xl p-6 border-gold-glow flex flex-col justify-between group hover:-translate-y-1 transition-all duration-300">
+        <div>
+          <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-400/30 flex items-center justify-center text-amber-300 mb-6 group-hover:bg-amber-400 group-hover:text-[#0B132B] transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+            </svg>
+          </div>
+          <h3 class="font-serif-heading text-xl font-bold text-white mb-3">Weddings & Social Celebrations</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Unforgettable luxury weddings, milestone birthdays, and exclusive private soirées tailored down to every floral stem, lighting cue, and guest touchpoint.
+          </p>
+        </div>
+        <div class="pt-6 mt-6 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="text-amber-400/80 font-medium">Full Design & Curation</span>
+          <a href="#booking" class="text-white hover:text-amber-300 flex items-center gap-1 font-semibold">Book Service &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="glass-card rounded-2xl p-6 border-gold-glow flex flex-col justify-between group hover:-translate-y-1 transition-all duration-300">
+        <div>
+          <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-400/30 flex items-center justify-center text-amber-300 mb-6 group-hover:bg-amber-400 group-hover:text-[#0B132B] transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-2v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12 0c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-2"/>
+            </svg>
+          </div>
+          <h3 class="font-serif-heading text-xl font-bold text-white mb-3">Concerts & Live Entertainment</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Turnkey live music festivals, stage production, artist liaison, acoustic engineering, and VIP hospitality for high-capacity live entertainment.
+          </p>
+        </div>
+        <div class="pt-6 mt-6 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="text-amber-400/80 font-medium">AV & Stage Management</span>
+          <a href="#booking" class="text-white hover:text-amber-300 flex items-center gap-1 font-semibold">Book Service &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="glass-card rounded-2xl p-6 border-gold-glow flex flex-col justify-between group hover:-translate-y-1 transition-all duration-300">
+        <div>
+          <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-400/30 flex items-center justify-center text-amber-300 mb-6 group-hover:bg-amber-400 group-hover:text-[#0B132B] transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
+            </svg>
+          </div>
+          <h3 class="font-serif-heading text-xl font-bold text-white mb-3">End-to-End Event Planning & Styling</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Full-service conceptualization, 3D spatial rendering, mood boards, floral direction, furniture rental, and custom thematic styling.
+          </p>
+        </div>
+        <div class="pt-6 mt-6 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="text-amber-400/80 font-medium">Concept to Reality</span>
+          <a href="#booking" class="text-white hover:text-amber-300 flex items-center gap-1 font-semibold">Book Service &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="glass-card rounded-2xl p-6 border-gold-glow flex flex-col justify-between group hover:-translate-y-1 transition-all duration-300 md:col-span-2 lg:col-span-2">
+        <div>
+          <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-400/30 flex items-center justify-center text-amber-300 mb-6 group-hover:bg-amber-400 group-hover:text-[#0B132B] transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>
+          </div>
+          <h3 class="font-serif-heading text-xl font-bold text-white mb-3">Vendor Management & On-Site Coordination</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Flawless execution on event day. We manage all contracted vendors (michelin-star caterers, mixologists, security, lighting technicians) and enforce minute-by-minute run-of-show schedules.
+          </p>
+        </div>
+        <div class="pt-6 mt-6 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="text-amber-400/80 font-medium">Stress-Free Event Day</span>
+          <a href="#booking" class="text-white hover:text-amber-300 flex items-center gap-1 font-semibold">Book Service &rarr;</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MEET THE LEADERSHIP & TEAM -->
+  <section id="team" class="py-24 bg-[#080D1F] border-t border-slate-800/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <div class="text-xs uppercase tracking-widest text-amber-400 font-semibold">Leadership & Experts</div>
+        <h2 class="font-serif-heading text-3xl sm:text-4xl font-bold text-white">Meet the Visionaries Behind AURA</h2>
+        <p class="text-slate-300 text-sm sm:text-base font-light">
+          A passionate team of creative strategists, logistics masters, and hospitality innovators committed to your event's success.
+        </p>
+      </div>
+
+      <!-- Founder & Head of Operations -->
+      <div class="mb-16">
+        <div class="glass-card rounded-3xl p-8 lg:p-10 border-gold-glow relative overflow-hidden">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <div class="lg:col-span-5 relative">
+              <div class="aspect-[4/3] rounded-2xl overflow-hidden border border-amber-400/30 shadow-xl">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" 
+                     alt="Victoria Sterling - Founder & Head of Operations" 
+                     class="w-full h-full object-cover">
+              </div>
+              <div class="absolute -bottom-4 -right-4 bg-gradient-to-r from-amber-500 to-amber-700 text-[#0B132B] font-bold text-xs px-4 py-2 rounded-xl shadow-lg">
+                Founder & Executive Director
+              </div>
+            </div>
+
+            <div class="lg:col-span-7 space-y-4">
+              <span class="text-xs font-semibold uppercase tracking-wider text-amber-400">Executive Leadership</span>
+              <h3 class="font-serif-heading text-2xl sm:text-3xl font-bold text-white">Victoria Sterling</h3>
+              <p class="text-sm font-medium text-amber-200/80">Founder & Head of Operations</p>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
+                With over a decade of luxury hospitality experience and creative direction, Victoria founded AURA to redefine how high-stakes events are conceptualized and executed. Her leadership guarantees visionary direction, operational rigor, and uncompromising client dedication.
+              </p>
+              
+              <blockquote class="p-4 rounded-xl bg-slate-900/80 border-l-4 border-amber-400 text-xs italic text-slate-300">
+                "An event isn't just a collection of details; it is an emotional atmosphere designed to leave a lasting legacy for everyone who steps inside."
+              </blockquote>
+
+              <div class="flex items-center gap-4 pt-2">
+                <a href="#contact" class="text-xs font-semibold text-amber-400 hover:text-amber-300 flex items-center gap-1">
+                  Connect with Victoria &rarr;
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 Team Leads -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+        
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 hover:border-amber-400/40 transition-all group flex flex-col justify-between">
+          <div>
+            <div class="aspect-square rounded-xl overflow-hidden mb-4 border border-slate-700">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=500&q=80" 
+                   alt="Elena Rostova" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <h4 class="font-serif-heading font-bold text-white text-base">Elena Rostova</h4>
+            <div class="text-[11px] text-amber-400 font-medium mt-0.5 mb-2">Head of Event Design & Styling</div>
+            <p class="text-[11px] text-slate-400 leading-relaxed">
+              Master of spatial aesthetics, color harmony, and immersive 3D event environments.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-800 text-[10px] text-slate-500 uppercase tracking-wider">
+            Lead 01 • Creative
+          </div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 hover:border-amber-400/40 transition-all group flex flex-col justify-between">
+          <div>
+            <div class="aspect-square rounded-xl overflow-hidden mb-4 border border-slate-700">
+              <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=500&q=80" 
+                   alt="Marcus Vance" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <h4 class="font-serif-heading font-bold text-white text-base">Marcus Vance</h4>
+            <div class="text-[11px] text-amber-400 font-medium mt-0.5 mb-2">Lead Logistics & Operations</div>
+            <p class="text-[11px] text-slate-400 leading-relaxed">
+              Precision planner overseeing timeline synchronization, permits, and venue setups.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-800 text-[10px] text-slate-500 uppercase tracking-wider">
+            Lead 02 • Operations
+          </div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 hover:border-amber-400/40 transition-all group flex flex-col justify-between">
+          <div>
+            <div class="aspect-square rounded-xl overflow-hidden mb-4 border border-slate-700">
+              <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=500&q=80" 
+                   alt="Sophia Chen" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <h4 class="font-serif-heading font-bold text-white text-base">Sophia Chen</h4>
+            <div class="text-[11px] text-amber-400 font-medium mt-0.5 mb-2">Corporate & Client Relations</div>
+            <p class="text-[11px] text-slate-400 leading-relaxed">
+              Dedicated concierge liaison ensuring client expectations are exceeded seamlessly.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-800 text-[10px] text-slate-500 uppercase tracking-wider">
+            Lead 03 • Client Relations
+          </div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 hover:border-amber-400/40 transition-all group flex flex-col justify-between">
+          <div>
+            <div class="aspect-square rounded-xl overflow-hidden mb-4 border border-slate-700">
+              <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=500&q=80" 
+                   alt="David Miller" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <h4 class="font-serif-heading font-bold text-white text-base">David Miller</h4>
+            <div class="text-[11px] text-amber-400 font-medium mt-0.5 mb-2">Marketing & Production Lead</div>
+            <p class="text-[11px] text-slate-400 leading-relaxed">
+              AV, media, sound engineering, and event broadcasting specialist.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-800 text-[10px] text-slate-500 uppercase tracking-wider">
+            Lead 04 • Production
+          </div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 hover:border-amber-400/40 transition-all group flex flex-col justify-between">
+          <div>
+            <div class="aspect-square rounded-xl overflow-hidden mb-4 border border-slate-700">
+              <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=500&q=80" 
+                   alt="Amara Okafor" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <h4 class="font-serif-heading font-bold text-white text-base">Amara Okafor</h4>
+            <div class="text-[11px] text-amber-400 font-medium mt-0.5 mb-2">Vendor & Hospitality Lead</div>
+            <p class="text-[11px] text-slate-400 leading-relaxed">
+              Curator of top-tier culinary partners, sommeliers, and guest service staff.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-800 text-[10px] text-slate-500 uppercase tracking-wider">
+            Lead 05 • Hospitality
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EVENT GALLERY / PORTFOLIO -->
+  <section id="gallery" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+      <div>
+        <div class="text-xs uppercase tracking-widest text-amber-400 font-semibold mb-2">Visual Portfolio</div>
+        <h2 class="font-serif-heading text-3xl sm:text-4xl font-bold text-white">Past Events & Concepts</h2>
+      </div>
+
+      <div class="flex flex-wrap gap-2 text-xs font-medium" id="galleryFilters">
+        <button data-filter="all" class="filter-btn active px-4 py-2 rounded-full bg-amber-400 text-[#0B132B] font-semibold transition-all">All Projects</button>
+        <button data-filter="corporate" class="filter-btn px-4 py-2 rounded-full glass-card hover:bg-white/10 text-slate-300 border border-slate-700 transition-all">Corporate</button>
+        <button data-filter="wedding" class="filter-btn px-4 py-2 rounded-full glass-card hover:bg-white/10 text-slate-300 border border-slate-700 transition-all">Weddings</button>
+        <button data-filter="concert" class="filter-btn px-4 py-2 rounded-full glass-card hover:bg-white/10 text-slate-300 border border-slate-700 transition-all">Concerts</button>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="galleryGrid">
+      
+      <div class="gallery-item corporate glass-card rounded-2xl overflow-hidden border border-slate-800 group relative">
+        <div class="h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80" 
+               alt="Apex Tech Innovation Summit" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0B132B] via-[#0B132B]/40 to-transparent opacity-90 p-6 flex flex-col justify-end">
+          <span class="text-[10px] uppercase font-bold tracking-widest text-amber-400">Corporate Summit</span>
+          <h4 class="font-serif-heading font-bold text-white text-lg">Apex Tech Innovation 2026</h4>
+          <p class="text-xs text-slate-300 mt-1">500 Attendees • Keynote & Interactive Exhibition</p>
+        </div>
+      </div>
+
+      <div class="gallery-item wedding glass-card rounded-2xl overflow-hidden border border-slate-800 group relative">
+        <div class="h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80" 
+               alt="Serenade in Champagne Rose Wedding" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0B132B] via-[#0B132B]/40 to-transparent opacity-90 p-6 flex flex-col justify-end">
+          <span class="text-[10px] uppercase font-bold tracking-widest text-amber-400">Luxury Wedding</span>
+          <h4 class="font-serif-heading font-bold text-white text-lg">Serenade in Rose Gold</h4>
+          <p class="text-xs text-slate-300 mt-1">Private Estate Nuptials & Floral Sculptures</p>
+        </div>
+      </div>
+
+      <div class="gallery-item concert glass-card rounded-2xl overflow-hidden border border-slate-800 group relative">
+        <div class="h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=800&q=80" 
+               alt="Aetheria Music Festival" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0B132B] via-[#0B132B]/40 to-transparent opacity-90 p-6 flex flex-col justify-end">
+          <span class="text-[10px] uppercase font-bold tracking-widest text-amber-400">Live Concert</span>
+          <h4 class="font-serif-heading font-bold text-white text-lg">Aetheria Festival Arena</h4>
+          <p class="text-xs text-slate-300 mt-1">Outdoor Lighting & VIP Lounge Coordination</p>
+        </div>
+      </div>
+
+      <div class="gallery-item corporate glass-card rounded-2xl overflow-hidden border border-slate-800 group relative">
+        <div class="h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80" 
+               alt="Vanguard Automotive Gala" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0B132B] via-[#0B132B]/40 to-transparent opacity-90 p-6 flex flex-col justify-end">
+          <span class="text-[10px] uppercase font-bold tracking-widest text-amber-400">Product Launch</span>
+          <h4 class="font-serif-heading font-bold text-white text-lg">Vanguard EV Launch Gala</h4>
+          <p class="text-xs text-slate-300 mt-1">360 Sound Stage & Executive Banquet</p>
+        </div>
+      </div>
+
+      <div class="gallery-item wedding glass-card rounded-2xl overflow-hidden border border-slate-800 group relative">
+        <div class="h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=800&q=80" 
+               alt="Midnight Azure Celebration" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0B132B] via-[#0B132B]/40 to-transparent opacity-90 p-6 flex flex-col justify-end">
+          <span class="text-[10px] uppercase font-bold tracking-widest text-amber-400">Private Celebration</span>
+          <h4 class="font-serif-heading font-bold text-white text-lg">Midnight Azure Soirée</h4>
+          <p class="text-xs text-slate-300 mt-1">Intimate Rooftop Dining & Mixology</p>
+        </div>
+      </div>
+
+      <div class="gallery-item concert glass-card rounded-2xl overflow-hidden border border-slate-800 group relative">
+        <div class="h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=800&q=80" 
+               alt="Symphony in Gold" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0B132B] via-[#0B132B]/40 to-transparent opacity-90 p-6 flex flex-col justify-end">
+          <span class="text-[10px] uppercase font-bold tracking-widest text-amber-400">Live Entertainment</span>
+          <h4 class="font-serif-heading font-bold text-white text-lg">Symphony in Gold Stage</h4>
+          <p class="text-xs text-slate-300 mt-1">Acoustic Engineering & Artist Hospitality</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- INTERACTIVE BOOKING & INQUIRY FORM -->
+  <section id="booking" class="py-24 bg-[#080D1F] border-t border-slate-800/60 relative">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-12 space-y-3">
+        <div class="text-xs uppercase tracking-widest text-amber-400 font-semibold">Start Planning</div>
+        <h2 class="font-serif-heading text-3xl sm:text-4xl font-bold text-white">Reserve Your Event Date</h2>
+        <p class="text-slate-300 text-sm font-light">
+          Tell us about your upcoming event. Our lead operations team will respond within 24 hours with a custom consultation.
+        </p>
+      </div>
+
+      <div class="glass-card rounded-3xl p-8 sm:p-10 border-gold-glow shadow-2xl relative">
+        <form id="eventBookingForm" class="space-y-6">
+          
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Full Name *</label>
+              <input type="text" required placeholder="e.g. Julian Vance" 
+                     class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 transition-colors">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Email Address *</label>
+              <input type="email" required placeholder="julian@company.com" 
+                     class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 transition-colors">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Phone Number *</label>
+              <input type="tel" required placeholder="+1 (555) 000-0000" 
+                     class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 transition-colors">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Event Type *</label>
+              <select required class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-sm text-white focus:outline-none focus:border-amber-400 transition-colors">
+                <option value="" disabled selected>Select event category</option>
+                <option value="corporate">Corporate Event & Launch</option>
+                <option value="wedding">Wedding & Social Celebration</option>
+                <option value="concert">Concert & Live Show</option>
+                <option value="private">Private Party / Soirée</option>
+                <option value="other">Other Bespoke Event</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Estimated Guest Count</label>
+              <select class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-sm text-white focus:outline-none focus:border-amber-400 transition-colors">
+                <option value="under50">Intimate (&lt; 50 Guests)</option>
+                <option value="50-150" selected>Medium (50 - 150 Guests)</option>
+                <option value="150-500">Large (150 - 500 Guests)</option>
+                <option value="500plus">Grand Scale (500+ Guests)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Budget Range *</label>
+              <select required class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-sm text-white focus:outline-none focus:border-amber-400 transition-colors">
+                <option value="15k-30k">$15,000 - $30,000</option>
+                <option value="30k-75k" selected>$30,000 - $75,000</option>
+                <option value="75k-150k">$75,000 - $150,000</option>
+                <option value="150k-plus">$150,000+</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Desired Event Date</label>
+              <input type="date" 
+                     class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-sm text-white focus:outline-none focus:border-amber-400 transition-colors">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Target Venue / Location</label>
+              <input type="text" placeholder="e.g. New York, NY or Undecided" 
+                     class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 transition-colors">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Message & Vision / Custom Requirements</label>
+            <textarea rows="4" placeholder="Tell us about your theme, aesthetic goals, or specific vendor requirements..." 
+                      class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 transition-colors"></textarea>
+          </div>
+
+          <div>
+            <button type="submit" class="w-full py-4 rounded-xl font-semibold text-sm uppercase tracking-wider bg-gradient-to-r from-[#D4AF37] via-[#FCEEAC] to-[#AA7C11] text-[#0B132B] shadow-xl shadow-amber-500/20 hover:scale-[1.01] active:scale-[0.99] transition-all">
+              Submit Event Inquiry
+            </button>
+          </div>
+
+        </form>
+
+        <div id="successMessage" class="hidden absolute inset-0 glass-card rounded-3xl p-8 flex flex-col items-center justify-center text-center space-y-4 bg-[#0B132B]/95 z-20">
+          <div class="w-16 h-16 rounded-full bg-amber-400/20 text-amber-300 flex items-center justify-center text-2xl border border-amber-400">
+            ✓
+          </div>
+          <h3 class="font-serif-heading text-2xl font-bold text-white">Inquiry Received!</h3>
+          <p class="text-xs text-slate-300 max-w-md">
+            Thank you for reaching out to AURA Events & Co. Lead Coordinator Sophia Chen will review your details and connect with you shortly.
+          </p>
+          <button id="resetFormBtn" class="px-6 py-2 rounded-full text-xs font-semibold uppercase bg-slate-800 text-amber-300 hover:bg-slate-700 transition-colors">
+            Send Another Inquiry
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact" class="bg-[#050814] text-slate-400 pt-16 pb-12 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-slate-800/80">
+        
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-amber-600 to-amber-300 flex items-center justify-center text-[#0B132B] font-bold text-sm">
+              A
+            </div>
+            <span class="font-serif-heading text-lg font-bold text-white tracking-wider">AURA Events</span>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Crafting bespoke, high-impact events with modern flair and flawless operational precision.
+          </p>
+          <div class="flex items-center gap-3 pt-2">
+            <a href="#" class="w-8 h-8 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-amber-300 hover:border-amber-400/40 transition-colors text-xs">Ig</a>
+            <a href="#" class="w-8 h-8 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-amber-300 hover:border-amber-400/40 transition-colors text-xs">Li</a>
+            <a href="#" class="w-8 h-8 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-amber-300 hover:border-amber-400/40 transition-colors text-xs">Pt</a>
+            <a href="#" class="w-8 h-8 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-amber-300 hover:border-amber-400/40 transition-colors text-xs">X</a>
+          </div>
+        </div>
+
+        <div>
+          <h5 class="text-xs font-semibold text-white uppercase tracking-wider mb-4">Navigation</h5>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#home" class="hover:text-amber-300 transition-colors">Home</a></li>
+            <li><a href="#about" class="hover:text-amber-300 transition-colors">About Us</a></li>
+            <li><a href="#services" class="hover:text-amber-300 transition-colors">Services Offered</a></li>
+            <li><a href="#team" class="hover:text-amber-300 transition-colors">Leadership & Team</a></li>
+            <li><a href="#gallery" class="hover:text-amber-300 transition-colors">Event Portfolio</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h5 class="text-xs font-semibold text-white uppercase tracking-wider mb-4">Event Types</h5>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#services" class="hover:text-amber-300 transition-colors">Corporate Summits</a></li>
+            <li><a href="#services" class="hover:text-amber-300 transition-colors">Luxury Weddings</a></li>
+            <li><a href="#services" class="hover:text-amber-300 transition-colors">Concerts & Shows</a></li>
+            <li><a href="#services" class="hover:text-amber-300 transition-colors">Product Launches</a></li>
+            <li><a href="#services" class="hover:text-amber-300 transition-colors">Private Soirées</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h5 class="text-xs font-semibold text-white uppercase tracking-wider mb-4">Headquarters</h5>
+          <ul class="space-y-2 text-xs text-slate-400">
+            <li class="flex items-center gap-2">
+              <span class="text-amber-400">📍</span> 5th Avenue Suite 1400, New York, NY
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-amber-400">✉️</span> concierge@auraevents.co
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-amber-400">📞</span> +1 (800) 555-AURA
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500">
+        <div>&copy; 2026 AURA Events & Co. All rights reserved.</div>
+        <div class="flex gap-6 mt-4 sm:mt-0">
+          <a href="#" class="hover:text-slate-400">Privacy Policy</a>
+          <a href="#" class="hover:text-slate-400">Terms of Service</a>
+          <a href="#" class="hover:text-slate-400">Vendor Portal</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    const filterBtns = document.querySelectorAll('#galleryFilters .filter-btn');
+    const galleryItems = document.querySelectorAll('#galleryGrid .gallery-item');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => {
+          b.classList.remove('bg-amber-400', 'text-[#0B132B]', 'font-semibold');
+          b.classList.add('glass-card', 'text-slate-300');
+        });
+        btn.classList.remove('glass-card', 'text-slate-300');
+        btn.classList.add('bg-amber-400', 'text-[#0B132B]', 'font-semibold');
+
+        const filter = btn.getAttribute('data-filter');
+
+        galleryItems.forEach(item => {
+          if (filter === 'all' || item.classList.contains(filter)) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    const form = document.getElementById('eventBookingForm');
+    const successMessage = document.getElementById('successMessage');
+    const resetFormBtn = document.getElementById('resetFormBtn');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      successMessage.classList.remove('hidden');
+    });
+
+    resetFormBtn.addEventListener('click', () => {
+      form.reset();
+      successMessage.classList.add('hidden');
+    });
+  </script>
+</body>
+</html>
